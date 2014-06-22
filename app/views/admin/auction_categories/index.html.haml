@@ -1,0 +1,26 @@
+%h3 分类列表
+= render partial: 'auction_category_list_table', locals: { form_url: admin_auction_categories_path }
+/
+  %table
+  %tr
+    %th Name
+    %th Level
+    %th Upid
+    %th Status
+    %th
+    %th
+    %th
+
+  - @auction_categories.each do |auction_category|
+    %tr
+      %td= auction_category.name
+      %td= auction_category.level
+      %td= auction_category.upid
+      %td= auction_category.status
+      %td= link_to 'Show', admin_auction_category_path(auction_category)
+      %td= link_to 'Edit', edit_admin_auction_category_path(auction_category)
+      %td= link_to 'Destroy', admin_auction_category_path(auction_category), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+
+  = link_to 'New Auction category', new_admin_auction_category_path

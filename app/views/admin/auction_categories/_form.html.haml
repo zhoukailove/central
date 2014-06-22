@@ -1,0 +1,12 @@
+= simple_form_for [:admin, @auction_category] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :level
+    = f.input :upid
+    = f.input :status
+
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to '返回', 'javascript:window.history.go(-1);', class: 'btn'

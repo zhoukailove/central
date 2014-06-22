@@ -1,5 +1,9 @@
 # -*- encoding : utf-8 -*-
 Central::Application.routes.draw do
+  namespace :admin do
+    resources :auction_categories
+  end
+
   root :to => 'users#index'
   
   # session
@@ -52,6 +56,12 @@ Central::Application.routes.draw do
   
   # captcha
   captcha_route
+
+  #seller
+  namespace :seller do
+    root :to => 'home#index'
+    resource :home
+  end
   
   # admin
   namespace :admin do

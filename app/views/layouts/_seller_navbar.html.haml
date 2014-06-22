@@ -6,13 +6,13 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to 'Central Admin', admin_root_path, class: 'navbar-brand'
+      = link_to 'Central Seller', seller_root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       %ul#top_nav.nav.navbar-nav
+
         = tab_link_to '统计', admin_root_path, 'home', 'index'
         = tab_link_to '用户', admin_users_path, 'users'
         = tab_link_to '分组', admin_groups_path, 'groups'
-        = tab_link_to '分类', admin_auction_categories_path, 'auction_categories'
         = tab_link_to '短信', admin_messages_path, 'messages'
         = tab_link_to '提醒', admin_notifications_path, 'notifications'
         = tab_link_to '积分', new_admin_score_path, 'scores'

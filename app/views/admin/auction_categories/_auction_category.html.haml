@@ -1,0 +1,17 @@
+.well
+  %table.profile
+    %tr
+      -#%td.avatar{'rowspan' => '3'}= image_tag user.avatar_file(:max), class: 'img-polaroid'
+      %td.value= content_tag :h3, auction_category.name
+    %tr
+      %td.key.pull-left 父级名称
+      %td.pull-left.value= content_tag :h3, auction_category.upid>0 ? AuctionCategory.find(auction_category.upid).name : '第一级'
+    %tr
+      %td.key.pull-left 包含子级
+      - AuctionCategory.where(upid: auction_category.id).each do |ac|
+        %td.pull-left.value= content_tag :h4,ac.name
+
+
+    %tr
+      %td.key.pull-left 状态
+      %td.pull-left.value= content_tag :h3, auction_category.status ? '有效' : '失效'

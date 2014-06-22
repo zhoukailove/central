@@ -236,6 +236,7 @@ zh-CN:
         login: 用户名称/邮箱地址
         remember: 记住我
         sex: 性别
+        seller: 卖家
         birthday: 生日
         location: 来自
         home_url: 主页
@@ -257,6 +258,11 @@ zh-CN:
         content: 内容
       tag:
         name: 名称
+      auction_category:
+        name: 名称
+        upid: 父级ID
+        level: 级别
+        status: 状态
   activemodel:
     models:
       score: 积分
