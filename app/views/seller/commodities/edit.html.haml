@@ -1,0 +1,13 @@
+%h1 Editing commodity
+
+
+-#= link_to 'Show', @commodity
+-#\|
+-#= link_to 'Back', commodities_path
+
+- if @tab == "price"
+  = render 'edit_price_form'
+- elsif @tab == 'photo'
+  = render 'edit_photo_form'
+- else
+  = render 'form'

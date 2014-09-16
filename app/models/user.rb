@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   validates :email, email_format: { message: '邮箱格式错误', on: :create }
   has_many :notifications, dependent: :delete_all # without destroy on notifications
   has_many :messages, dependent: :delete_all # without destroy on messages
+  has_many :commodities, dependent: :destroy
+
+
   
   include Authentication
   include PasswordReset

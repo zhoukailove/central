@@ -1,7 +1,8 @@
+# -*- encoding : utf-8 -*-
 module Seller
 class HomeController < BaseController
   before_action :set_seller_home, only: [:show, :edit, :update, :destroy]
-
+  #before_filter :configure_charsets
   # GET /seller/home
   def index
     @users_count                = User.count
@@ -10,6 +11,31 @@ class HomeController < BaseController
     @unread_nitofications_count = Notification.unread.count
     @tags_count                 = Tag.count
   end
+
+
+    def configure_charsets
+      @headers["Content-Type"]="text/html;charset=utf-8"
+    end
+
+    def uploadFile(file)
+      if !file.original_filename.empty?
+        #生成一个随机的文件名
+        @filename=getFileName(file.original_filename)
+        #向dir目录写入文件
+        File.open("#{RAILS_ROOT}/public/emag/upload/#{@filename}", "wb") do |f|
+          f.write(file.read)
+        end
+        #返回文件名称，保存到数据库中
+        return @filename
+      end
+    end
+
+    def getFileName(filename)
+      if !filename.nil?
+        require 'uuidtools'
+        filename.sub(/.*./,UUID.random_create.to_s+'.')
+      end
+    end
 
   # GET /seller/home/1
   def show
@@ -24,14 +50,15 @@ class HomeController < BaseController
   def edit
   end
 
-  # POST /seller/home
   def create
-    @seller_home = Seller::Home.new(seller_home_params)
-
-    if @seller_home.save
-      redirect_to @seller_home, notice: 'Home was successfully created.'
+    if request.get?
+      @book=Book.new
     else
-      render action: 'new'
+      @book=Book.new(params[:book])
+      @book.bgImage=uploadFile(params[:book]['bgImage'])
+      if @book.save
+        redirect_to_index
+      end
     end
   end
 

@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @commodity.title
+%p
+  %b User:
+  = @commodity.user_id
+%p
+  %b Status:
+  = @commodity.status
+%p
+  %b Commodity number:
+  = @commodity.commodity_number
+%p
+  %b Orders count:
+  = @commodity.orders_count
+%p
+  %b Comments count:
+  = @commodity.comments_count
+
+= link_to 'Edit', edit_commodity_path(@commodity)
+\|
+= link_to 'Back', commodities_path

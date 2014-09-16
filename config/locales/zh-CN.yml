@@ -263,6 +263,11 @@ zh-CN:
         upid: 父级ID
         level: 级别
         status: 状态
+      commodity:
+        title: 标题
+        commodity_number: 商品编号
+        orders_count: 订单数量
+        comments_count: 评论数量
   activemodel:
     models:
       score: 积分

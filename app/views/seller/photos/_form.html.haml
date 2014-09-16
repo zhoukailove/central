@@ -1,0 +1,11 @@
+= simple_form_for [:seller,@photo], html: { class: 'form-horizontal' } do |f|
+
+  .form-inputs
+    = f.input :commoity_id
+    = f.input :photo
+
+  .form-actions
+    = f.submit '发送', class: 'btn btn-primary'
+    = link_to '返回', 'javascript:window.history.go(-1);', class: 'btn'
+
+

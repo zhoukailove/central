@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 Central::Application.routes.draw do
+
+
   namespace :admin do
     resources :auction_categories
   end
@@ -28,7 +30,7 @@ Central::Application.routes.draw do
   patch 'profile/update_avatar'   => 'profiles#update_avatar',   as: 'update_avatar'
   get   'profile/edit_password'   => 'profiles#edit_password',   as: 'edit_password'
   put   'profile/update_password' => 'profiles#update_password', as: 'update_password'
-  
+
   # watching
   resources :relationships, only: [:create, :destroy]
   
@@ -61,8 +63,20 @@ Central::Application.routes.draw do
   namespace :seller do
     root :to => 'home#index'
     resource :home
+    get "commodities/:id/edit/:tab(/:photo_id)" => "commodities#edit"
+    get 'upload' => 'home#upload'
+    post 'upload' => 'home#upload'
+    resources :commodities do
+      delete 'group_destroy'
+      collection do
+        get :phone
+        post :phone
+      end
+    end
+
+    resources :photos
   end
-  
+
   # admin
   namespace :admin do
     root :to => 'home#index'

@@ -1,0 +1,17 @@
+= render :partial => "upload_photo"
+= simple_form_for [:seller, Photo.new(:commodity_id => @commodity.id)] , html: { :multipart => true , class: 'form-horizontal' } do |f|
+  -#= f.error_notification
+
+  .form-inputs
+    = f.file_field :photo
+    -#= f.f.hidden_field :photo_cache
+    -#= f.input :status
+
+    -#= f.input :commodity_number
+    -#= f.input :orders_count
+    -#= f.input :comments_count
+    9 有问有答后台实现
+
+  .form-actions
+    = f.submit '发送', class: 'btn btn-primary'
+    = link_to '返回', 'javascript:window.history.go(-1);', class: 'btn'

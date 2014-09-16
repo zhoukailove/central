@@ -1,0 +1,36 @@
+#search_form
+  = search_form_for @q, url: form_url, html: {class: 'form-search'} do |f|
+    .input-append
+      = f.text_field :title_cont, class: 'search-query', placeholder: '输入标题'
+      = f.submit '搜索', class: 'btn'
+= render partial: 'shared/group_operation_tools', locals: { url: group_destroy_admin_users_path }
+- if @commodities.length > 0
+  %table.table
+    %thead
+      %tr
+        %th= check_box_tag :group_operation
+        %th.count #
+        %th= sort_link(@q, :commodity_number, '商品编号')
+        %th= sort_link(@q, :title,'标题')
+        %th= sort_link(@q, :status,'状态')
+        %th= sort_link(@q, :created_at, '开始时间')
+        %th= sort_link(@q, :comments_count, '评论数')
+        %th= sort_link(@q, :order_number, '订单数')
+        %th 操作
+    %tbody
+      - @commodities.each_with_index do |commodity, index|
+        %tr{id: "commodity_#{commodity.id}", class: 'commodity'}
+          %td.group_operation= check_box_tag "thread_checkbox", commodity.id
+          %td= index + 1 + current_page
+          %td= link_to commodity.commodity_number, [:seller, commodity]
+          %td= commodity.title
+          %td= commodity.status
+          %td= commodity.created_at.strftime('%Y-%m-%d')
+          %td= badge_icon(commodity.comments_count)
+          %td= badge_icon(commodity.orders_count)
+          %td
+            = link_to '编辑', edit_seller_commodity_path(user)
+            = link_to '删除', [:seller, commodity], method: :delete, remote: true, data: { confirm: '确定删除？' }
+  .pagination.pull-right= will_paginate @commodities, renderer: BootstrapPagination::Rails
+- else
+  .no_content 无内容

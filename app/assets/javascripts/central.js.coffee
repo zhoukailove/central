@@ -122,8 +122,8 @@ class AvatarCropper
     $("##{box}").css
       width: Math.round(size/c.w * $('#cropbox').width()) + 'px',
       height: Math.round(size/c.h * $('#cropbox').height()) + 'px',
-      marginLeft: '-' + Math.round(size/c.w * c.x) + 'px',
-      marginTop: '-' + Math.round(size/c.h * c.y) + 'px'
+      marginLeft: Math.round(size/c.w * c.x) + 'px',
+      marginTop: Math.round(size/c.h * c.y) + 'px'
 
 @flash_html = (key, title, content) -> "<div class='alert alert-#{key}'><a href='#', class='close' data-dismiss='alert'>×</a><strong>#{title}</strong> : #{content}</div>"
 

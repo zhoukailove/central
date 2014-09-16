@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622060515) do
+ActiveRecord::Schema.define(version: 20140701141204) do
 
   create_table "auction_categories", force: true do |t|
     t.string   "name"
     t.integer  "level"
     t.integer  "upid"
     t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "commodities", force: true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.boolean  "status"
+    t.integer  "commodity_number"
+    t.integer  "orders_count"
+    t.integer  "comments_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,6 +86,14 @@ ActiveRecord::Schema.define(version: 20140622060515) do
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
+  create_table "photos", force: true do |t|
+    t.integer  "commodity_id"
+    t.string   "photo"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "relationships", force: true do |t|
     t.integer "watching_id"
@@ -141,6 +160,7 @@ ActiveRecord::Schema.define(version: 20140622060515) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "seller"
+    t.integer  "commodities_count"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
